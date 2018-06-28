@@ -15,7 +15,12 @@ public class PlayerControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.UpArrow))
+        var screen = Camera.main.WorldToViewportPoint(transform.position);
+        screen.x = Mathf.Clamp01(screen.x);
+        screen.y = Mathf.Clamp01(screen.y);
+        transform.position = Camera.main.ViewportToWorldPoint(screen);
+
+        if (Input.GetKey(KeyCode.UpArrow))
         {
             rb.velocity = new Vector2(0, speed);
         }
